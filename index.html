@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="NextQ — Sistem Antrean Mandiri Cerdas untuk Klinik Gading. Kios Ambil Tiket, Layar Display Monitor, dan Meja Panggilan Dokter.">
+  <title>NextQ — Antrean Mandiri Klinik Gading</title>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Font Inter & Google Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Top Navigation Header -->
+  <header class="app-header no-print">
+    <div class="header-inner container">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <div class="brand-title">NextQ <span class="badge-clinic">Klinik Gading</span></div>
+          <div class="brand-sub">Sistem Antrean & Manajemen Pasien</div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" role="tablist">
+        <button type="button" class="nav-tab active" data-view="kiosk">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          <span>Kios Mandiri</span>
+        </button>
+        <button type="button" class="nav-tab" data-view="display">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+          <span>Layar Display TV</span>
+        </button>
+        <button type="button" class="nav-tab" data-view="operator">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>Meja Petugas</span>
+        </button>
+        <button type="button" class="nav-tab" data-view="analytics">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          <span>Statistik & Rekap</span>
+        </button>
+      </nav>
+
+      <!-- Right Header Tools -->
+      <div class="header-tools">
+        <!-- Audio Status Pill -->
+        <button type="button" class="tool-btn audio-toggle" id="audioToggleBtn" title="Aktifkan Suara Panggilan (TTS & Ding-dong)">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="audioIcon">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+          <span class="audio-label" id="audioLabel">Audio Aktif</span>
+        </button>
+
+        <div class="header-clock" id="headerClock">12:00:00 WIB</div>
+        <div class="online-indicator" title="Mode Offline Ready (PWA)">
+          <span class="indicator-dot"></span>
+          <span class="indicator-text">Online</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="main-container container">
+
+    <!-- VIEW 1: KIOS MANDIRI (Ambil Antrean Pasien) -->
+    <section id="viewKiosk" class="app-view active">
+      <div class="kiosk-welcome text-center">
+        <div class="welcome-chip">Layanan Antrean Mandiri</div>
+        <h1 class="kiosk-heading">Selamat Datang di Klinik Gading</h1>
+        <p class="kiosk-subtext">Sentuh salah satu poli tujuan di bawah ini untuk mengambil tiket nomor antrean Anda.</p>
+      </div>
+
+      <!-- Quick Optional Patient Info Form -->
+      <div class="kiosk-input-card card">
+        <div class="kiosk-form-header">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Data Pasien (Opsional / Bisa Langsung Tekan Poli)</span>
+        </div>
+        <div class="kiosk-form-grid">
+          <div class="form-group">
+            <label for="patientNameInput">Nama Lengkap Pasien</label>
+            <input type="text" id="patientNameInput" placeholder="Contoh: Bpk. Bambang Sutopo" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="patientPhoneInput">No. WhatsApp / HP</label>
+            <input type="tel" id="patientPhoneInput" placeholder="08xxxxxxxxxx (untuk notifikasi WA)" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="patientCategorySelect">Kategori Pasien</label>
+            <select id="patientCategorySelect">
+              <option value="Umum">Umum / Mandiri</option>
+              <option value="BPJS">BPJS Kesehatan</option>
+              <option value="Asuransi">Asuransi Swasta</option>
+              <option value="Lansia / Prioritas">Prioritas / Lansia (>60 thn)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Tombol Poli / Layanan -->
+      <div class="kiosk-service-grid" id="kioskServiceGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Informasi Cepat Panduan Pasien -->
+      <div class="kiosk-footer-note card">
+        <div class="note-item">
+          <span class="note-icon">1</span>
+          <div class="note-text">
+            <strong>Ambil Tiket</strong>
+            <p>Pilih poli tujuan dan simpan/cetak tiket antrean Anda.</p>
+          </div>
+        </div>
+        <div class="note-divider"></div>
+        <div class="note-item">
+          <span class="note-icon">2</span>
+          <div class="note-text">
+            <strong>Tunggu di Ruang Tunggu</strong>
+            <p>Perhatikan nomor antrean di Layar Monitor TV & audio panggilan.</p>
+          </div>
+        </div>
+        <div class="note-divider"></div>
+        <div class="note-item">
+          <span class="note-icon">3</span>
+          <div class="note-text">
+            <strong>Menuju Ruang Poli</strong>
+            <p>Masuk ke ruangan poli yang dituju saat nomor Anda dipanggil.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: LAYAR DISPLAY TV (Ruang Tunggu Pasien) -->
+    <section id="viewDisplay" class="app-view">
+      <div class="display-top-bar">
+        <div class="display-clinic-info">
+          <h2>KLINIK GADING YOGYAKARTA</h2>
+          <p>Jl. Mayjend Sutoyo No. 42, Mantrijeron, Kota Yogyakarta • Telp (0274) 378890</p>
+        </div>
+        <div class="display-datetime">
+          <div class="display-time" id="displayBigTime">12:00:00</div>
+          <div class="display-date" id="displayBigDate">Jumat, 21 November 2026</div>
+        </div>
+        <button type="button" class="btn-fullscreen-toggle" id="btnToggleFullscreen" title="Layar Penuh (F11)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          <span>Fullscreen</span>
+        </button>
+      </div>
+
+      <!-- Billboard Utama Nomor yang Sedang Dipanggil -->
+      <div class="display-hero-board card" id="displayHeroBoard">
+        <div class="hero-board-header">
+          <span class="calling-pulse-badge">SEDANG DIPANGGIL</span>
+          <span class="calling-timestamp" id="heroCallingTimestamp">-</span>
+        </div>
+        <div class="hero-board-body">
+          <div class="hero-number-wrap">
+            <span class="hero-number-label">NOMOR ANTREAN</span>
+            <div class="hero-number" id="heroNumberDisplay">---</div>
+          </div>
+          <div class="hero-arrow">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="hero-destination-wrap">
+            <span class="hero-dest-label">MENUJU RUANGAN / LOKET</span>
+            <div class="hero-destination" id="heroDestDisplay">Belum Ada Panggilan</div>
+            <div class="hero-patient-name" id="heroPatientDisplay">-</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid 4 Layanan / Poli -->
+      <div class="display-counter-grid" id="displayCounterGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Marquee Ticker Bawah -->
+      <div class="display-marquee-bar card">
+        <div class="marquee-tag">INFO KLINIK</div>
+        <div class="marquee-content">
+          <span id="marqueeText">Selamat datang di Klinik Gading. Harap memperhatikan nomor antrean di layar. Demi kenyamanan bersama, mohon tidak meninggalkan area tunggu saat nomor Anda mendekati giliran. Terima kasih atas kerja sama Anda.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: MEJA PETUGAS & DOKTER (OPERATOR CONSOLE) -->
+    <section id="viewOperator" class="app-view">
+      <!-- Operator Controls Top Bar -->
+      <div class="operator-header card">
+        <div class="operator-select-wrap">
+          <label for="operatorPoliSelect">Pilih Loket & Ruang Layanan Anda:</label>
+          <select id="operatorPoliSelect" class="operator-select">
+            <!-- Options populated by JS -->
+          </select>
+        </div>
+        <div class="operator-teller-badge">
+          <span class="teller-status-dot"></span>
+          <span id="operatorCurrentDoctor">Petugas: Dr. Hendra Prasetyo (Poli Umum)</span>
+        </div>
+      </div>
+
+      <div class="operator-layout-grid">
+        <!-- Kolom Kiri: Active Calling Console -->
+        <div class="operator-active-box card">
+          <div class="box-tag">Pasien Sedang Dilayani</div>
+
+          <div class="active-serving-card" id="operatorServingCard">
+            <div class="serving-number-big" id="opServingNumber">---</div>
+            <div class="serving-details">
+              <h3 id="opServingName">Tidak ada pasien yang sedang dilayani</h3>
+              <p id="opServingMeta">Silakan panggil antrean berikutnya di bawah.</p>
+            </div>
+          </div>
+
+          <!-- Action Buttons Group -->
+          <div class="operator-actions-grid">
+            <button type="button" class="btn-op btn-next" id="btnOpNext">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+              <span>Panggil Berikutnya</span>
+            </button>
+            <button type="button" class="btn-op btn-recall" id="btnOpRecall">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+              <span>Panggil Ulang (Recall)</span>
+            </button>
+            <button type="button" class="btn-op btn-finish" id="btnOpFinish">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>Selesai Layani</span>
+            </button>
+            <button type="button" class="btn-op btn-skip" id="btnOpSkip">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              <span>Lewati / Absen</span>
+            </button>
+          </div>
+
+          <!-- Tambah Pasien Manual Cepat oleh Petugas -->
+          <div class="op-manual-add">
+            <h4>Pendaftaran Manual / Walk-in</h4>
+            <div class="manual-input-row">
+              <input type="text" id="manualPatientName" placeholder="Nama Pasien Walk-in...">
+              <button type="button" class="btn-sm-primary" id="btnManualAdd">Daftarkan ke Antrean</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom Kanan: Antrean Menunggu di Poli Ini -->
+        <div class="operator-queue-box card">
+          <div class="queue-box-header">
+            <h3>Daftar Menunggu (<span id="opQueueCount">0</span>)</h3>
+            <span class="queue-poli-label" id="opQueuePoliName">Poli Umum</span>
+          </div>
+          <div class="queue-list" id="opQueueList">
+            <!-- List items populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: STATISTIK & REKAP HARIAN -->
+    <section id="viewAnalytics" class="app-view">
+      <!-- Summary Cards -->
+      <div class="stats-overview-grid">
+        <div class="stat-card card">
+          <div class="stat-icon icon-teal">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-label">Total Tiket Hari Ini</div>
+            <div class="stat-value" id="statTotalTickets">0</div>
+            <div class="stat-desc">Akumulasi seluruh poli</div>
+          </div>
+        </div>
+
+        <div class="stat-card card">
+          <div class="stat-icon icon-emerald">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-label">Selesai Dilayani</div>
+            <div class="stat-value" id="statCompleted">0</div>
+            <div class="stat-desc" id="statCompletedPct">0% completion rate</div>
+          </div>
+        </div>
+
+        <div class="stat-card card">
+          <div class="stat-icon icon-amber">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-label">Masih Menunggu</div>
+            <div class="stat-value" id="statWaiting">0</div>
+            <div class="stat-desc">Di ruang tunggu saat ini</div>
+          </div>
+        </div>
+
+        <div class="stat-card card">
+          <div class="stat-icon icon-rose">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-label">Dilewati / Batal</div>
+            <div class="stat-value" id="statSkipped">0</div>
+            <div class="stat-desc">Tidak hadir saat dipanggil</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rekap Tabel & Action Bar -->
+      <div class="table-card card">
+        <div class="table-header-bar">
+          <div class="table-title-group">
+            <h3>Riwayat & Log Panggilan Hari Ini</h3>
+            <p>Data tersimpan di penyimpanan lokal browser (Offline-first).</p>
+          </div>
+          <div class="table-action-group">
+            <select id="filterPoliHistory" class="select-filter">
+              <option value="ALL">Semua Poli</option>
+              <option value="A">Poli Umum</option>
+              <option value="B">Poli Gigi & Mulut</option>
+              <option value="C">Poli KIA & Anak</option>
+              <option value="D">Farmasi / Apotek</option>
+            </select>
+            <button type="button" class="btn-action" id="btnExportCsv">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Export CSV</span>
+            </button>
+            <button type="button" class="btn-action btn-danger-soft" id="btnResetAll">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              <span>Reset Antrean Harian</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table" id="historyTable">
+            <thead>
+              <tr>
+                <th>No. Tiket</th>
+                <th>Poli / Loket</th>
+                <th>Nama Pasien</th>
+                <th>Kategori</th>
+                <th>Waktu Ambil</th>
+                <th>Waktu Panggil</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL TIKET CETAK / PREVIEW (Bisa Dicetak Format Thermal 58mm/80mm) -->
+  <div class="modal-backdrop" id="ticketModal" hidden>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header no-print">
+          <h3>Tiket Antrean Diterbitkan</h3>
+          <button type="button" class="btn-close" id="btnCloseTicketModal">&times;</button>
+        </div>
+
+        <!-- AREA CETAK TIKET THERMAL RESMI -->
+        <div class="ticket-thermal-card" id="printableTicket">
+          <div class="ticket-clinic-header">
+            <h2 class="ticket-clinic-name">KLINIK GADING</h2>
+            <p class="ticket-clinic-addr">Jl. Mayjend Sutoyo No. 42 Mantrijeron</p>
+            <p class="ticket-clinic-contact">Telp: (0274) 378890</p>
+          </div>
+          <div class="ticket-dashed-line"></div>
+
+          <div class="ticket-service-name" id="ticketServiceDisplay">POLI UMUM</div>
+          <div class="ticket-number-display" id="ticketNumberDisplay">A-001</div>
+          
+          <div class="ticket-meta-grid">
+            <div class="ticket-meta-row">
+              <span>Pasien:</span>
+              <strong id="ticketPatientDisplay">Umum</strong>
+            </div>
+            <div class="ticket-meta-row">
+              <span>Kategori:</span>
+              <strong id="ticketCategoryDisplay">Umum</strong>
+            </div>
+            <div class="ticket-meta-row">
+              <span>Waktu:</span>
+              <span id="ticketTimeDisplay">21 Nov 2026 12:00</span>
+            </div>
+            <div class="ticket-meta-row">
+              <span>Sisa di Depan:</span>
+              <strong id="ticketAheadDisplay">0 Pasien</strong>
+            </div>
+          </div>
+
+          <div class="ticket-dashed-line"></div>
+          
+          <!-- Barcode Simulation for Thermal Print -->
+          <div class="barcode-container">
+            <div class="barcode-lines">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="barcode-text" id="ticketCodeDisplay">KG-A001-20261121</div>
+          </div>
+
+          <div class="ticket-clinic-footer">
+            <p>Silakan duduk dan tunggu nomor Anda dipanggil.</p>
+            <p>Terima kasih atas kunjungan Anda.</p>
+          </div>
+        </div>
+
+        <div class="modal-footer no-print">
+          <button type="button" class="btn-secondary" id="btnDoneTicket">Tutup</button>
+          <button type="button" class="btn-primary" id="btnPrintTicket">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+            <span>Cetak Tiket (Thermal)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer no-print">
+    <div class="container footer-inner">
+      <p>&copy; 2026 NextQ — Sistem Antrean Mandiri Terpadu Klinik Gading. Siap Digunakan Secara Offline.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

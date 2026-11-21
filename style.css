@@ -1,0 +1,1601 @@
+/* ===================================================================
+   NextQ — Sistem Antrean Mandiri Cerdas Klinik Gading
+   Modern Medical UI & Thermal Print Ready
+   =================================================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+:root {
+  --primary: #0f766e;
+  --primary-hover: #115e59;
+  --primary-light: #ccfbf1;
+  --primary-dark: #134e4a;
+  --accent: #10b981;
+  --accent-light: #d1fae5;
+  --amber: #f59e0b;
+  --amber-light: #fef3c7;
+  --rose: #f43f5e;
+  --rose-light: #ffe4e6;
+  --indigo: #6366f1;
+  --indigo-light: #e0e7ff;
+  --sky: #0284c7;
+  --sky-light: #e0f2fe;
+
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --border-focus: #0f766e;
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ===================================================================
+   Header & Navigation
+   =================================================================== */
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-logo {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--primary) 0%, #0d9488 100%);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(15, 118, 110, 0.25);
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.badge-clinic {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.brand-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  background: #f1f5f9;
+  padding: 0.35rem;
+  border-radius: var(--radius-md);
+  gap: 0.25rem;
+}
+
+.nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-tab:hover {
+  color: var(--primary-dark);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.nav-tab.active {
+  background: #ffffff;
+  color: var(--primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tool-btn:hover {
+  background: #f8fafc;
+  color: var(--primary);
+  border-color: var(--primary-light);
+}
+
+.tool-btn.audio-on {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  border-color: #99f6e4;
+}
+
+.header-clock {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  background: #f8fafc;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.online-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+
+/* ===================================================================
+   Card & Base Utility
+   =================================================================== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.main-container {
+  flex: 1;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.app-view {
+  display: none;
+}
+
+.app-view.active {
+  display: block;
+}
+
+/* ===================================================================
+   VIEW 1: KIOS MANDIRI (Ambil Antrean Pasien)
+   =================================================================== */
+.kiosk-welcome {
+  max-width: 680px;
+  margin: 0 auto 2rem;
+}
+
+.welcome-chip {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kiosk-heading {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.kiosk-subtext {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.kiosk-input-card {
+  max-width: 880px;
+  margin: 0 auto 2rem;
+  border-left: 4px solid var(--primary);
+}
+
+.kiosk-form-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.kiosk-form-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.form-group input,
+.form-group select {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  color: var(--text-main);
+  transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+}
+
+.kiosk-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+}
+
+.service-card {
+  background: #ffffff;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-card-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.badge-a { background: #ccfbf1; color: #0f766e; }
+.badge-b { background: #e0f2fe; color: #0284c7; }
+.badge-c { background: #fef3c7; color: #b45309; }
+.badge-d { background: #e0e7ff; color: #4338ca; }
+
+.service-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon-a { background: rgba(15, 118, 110, 0.1); color: #0f766e; }
+.icon-b { background: rgba(2, 132, 199, 0.1); color: #0284c7; }
+.icon-c { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+.icon-d { background: rgba(99, 102, 241, 0.1); color: #4f46e5; }
+
+.service-info h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+}
+
+.service-info p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 1.25rem;
+}
+
+.service-stats-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.service-stats-pill strong {
+  color: var(--text-main);
+}
+
+.btn-service-take {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: none;
+  background: var(--primary);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-service-take:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.3);
+}
+
+.kiosk-footer-note {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: #ffffff;
+}
+
+.note-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.note-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.note-text strong {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  display: block;
+}
+
+.note-text p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.note-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-color);
+}
+
+/* ===================================================================
+   VIEW 2: LAYAR DISPLAY TV (Ruang Tunggu)
+   =================================================================== */
+.display-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.display-clinic-info h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  letter-spacing: -0.01em;
+}
+
+.display-clinic-info p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.display-datetime {
+  text-align: right;
+}
+
+.display-time {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.display-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.btn-fullscreen-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--border-color);
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-fullscreen-toggle:hover {
+  background: #ffffff;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Display Hero Board */
+.display-hero-board {
+  background: linear-gradient(135deg, #042f2e 0%, #0f766e 100%);
+  color: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 16px 32px rgba(15, 118, 110, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.calling-pulse-badge {
+  background: var(--rose);
+  color: #ffffff;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: pulseCalling 1.8s infinite;
+}
+
+@keyframes pulseCalling {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+  70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+}
+
+.calling-timestamp {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-mono);
+}
+
+.hero-board-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.hero-number-wrap {
+  text-align: center;
+}
+
+.hero-number-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #99f6e4;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.hero-number {
+  font-family: var(--font-mono);
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-arrow {
+  color: #5eead4;
+}
+
+.hero-destination-wrap {
+  text-align: left;
+}
+
+.hero-dest-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #99f6e4;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.hero-destination {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.hero-patient-name {
+  font-size: 1.1rem;
+  color: #ccfbf1;
+  margin-top: 0.5rem;
+}
+
+/* 4 Counters Grid in Display */
+.display-counter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.display-counter-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+
+.display-counter-card.is-active-counter {
+  border-color: var(--primary);
+  background: #f0fdfa;
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.15);
+}
+
+.counter-header-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.counter-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.counter-num-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.counter-num-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: block;
+  text-transform: uppercase;
+}
+
+.counter-num-val {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  line-height: 1.1;
+}
+
+.counter-wait-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Display Marquee */
+.display-marquee-bar {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  gap: 1rem;
+}
+
+.marquee-tag {
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.marquee-content {
+  overflow: hidden;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.marquee-content span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marqueeScroll 28s linear infinite;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+/* ===================================================================
+   VIEW 3: MEJA PETUGAS & DOKTER (OPERATOR)
+   =================================================================== */
+.operator-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.operator-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.operator-select-wrap label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.operator-select {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  color: var(--primary-dark);
+}
+
+.operator-teller-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+}
+
+.teller-status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+.operator-layout-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.5rem;
+}
+
+.operator-active-box {
+  border-top: 4px solid var(--primary);
+}
+
+.box-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.active-serving-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.serving-number-big {
+  font-family: var(--font-mono);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--primary-dark);
+  background: #ffffff;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-color);
+  line-height: 1;
+}
+
+.serving-details h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.serving-details p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.operator-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btn-op {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-next {
+  background: var(--primary);
+  color: #ffffff;
+  grid-column: span 2;
+  font-size: 1.1rem;
+  padding: 1.15rem;
+}
+
+.btn-next:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
+}
+
+.btn-recall {
+  background: #ffffff;
+  color: var(--sky);
+  border: 2px solid var(--sky-light);
+}
+
+.btn-recall:hover {
+  background: var(--sky-light);
+  border-color: var(--sky);
+}
+
+.btn-finish {
+  background: #ffffff;
+  color: var(--accent);
+  border: 2px solid var(--accent-light);
+}
+
+.btn-finish:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.btn-skip {
+  background: #ffffff;
+  color: var(--rose);
+  border: 2px solid var(--rose-light);
+  grid-column: span 2;
+}
+
+.btn-skip:hover {
+  background: var(--rose-light);
+  border-color: var(--rose);
+}
+
+.op-manual-add {
+  background: #f8fafc;
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-color);
+}
+
+.op-manual-add h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+}
+
+.manual-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.manual-input-row input {
+  flex: 1;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.btn-sm-primary {
+  padding: 0.6rem 1rem;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Operator Queue Box */
+.queue-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.queue-box-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.queue-poli-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+}
+
+.queue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.queue-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.queue-item:hover {
+  background: #ffffff;
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.q-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.q-num {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+  background: #ffffff;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.q-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.q-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.q-call-btn {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--primary);
+  background: #ffffff;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.q-call-btn:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ===================================================================
+   VIEW 4: STATISTIK & REKAP
+   =================================================================== */
+.stats-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.stat-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-teal { background: var(--primary-light); color: var(--primary); }
+.icon-emerald { background: var(--accent-light); color: var(--accent); }
+.icon-amber { background: var(--amber-light); color: var(--amber); }
+.icon-rose { background: var(--rose-light); color: var(--rose); }
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.stat-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.table-card {
+  padding: 1.5rem;
+}
+
+.table-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.table-title-group h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.table-title-group p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.table-action-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.select-filter {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+}
+
+.btn-action {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-action:hover {
+  background: #f8fafc;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn-danger-soft {
+  color: var(--rose);
+}
+
+.btn-danger-soft:hover {
+  background: var(--rose-light);
+  border-color: var(--rose);
+  color: var(--rose);
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.data-table th {
+  background: #f8fafc;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.data-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.data-table tr:hover td {
+  background: #f8fafc;
+}
+
+.badge-status {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.status-waiting { background: var(--amber-light); color: var(--amber); }
+.status-serving { background: var(--primary-light); color: var(--primary); }
+.status-completed { background: var(--accent-light); color: var(--accent); }
+.status-skipped { background: var(--rose-light); color: var(--rose); }
+
+/* ===================================================================
+   MODAL TIKET CETAK (THERMAL PRINTER 58mm/80mm)
+   =================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 420px;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  background: #f8fafc;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  padding: 0.65rem 1.25rem;
+  background: #ffffff;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Struk Fisik Thermal */
+.ticket-thermal-card {
+  padding: 2rem 1.75rem;
+  background: #ffffff;
+  font-family: var(--font-sans);
+  text-align: center;
+  color: #000000;
+}
+
+.ticket-clinic-name {
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.15rem;
+}
+
+.ticket-clinic-addr {
+  font-size: 0.75rem;
+  color: #475569;
+}
+
+.ticket-clinic-contact {
+  font-size: 0.75rem;
+  color: #475569;
+}
+
+.ticket-dashed-line {
+  border-bottom: 2px dashed #94a3b8;
+  margin: 1.25rem 0;
+}
+
+.ticket-service-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #0f172a;
+}
+
+.ticket-number-display {
+  font-family: var(--font-mono);
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: #000000;
+  margin: 0.5rem 0;
+  letter-spacing: 0.02em;
+}
+
+.ticket-meta-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  text-align: left;
+  background: #f8fafc;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e2e8f0;
+}
+
+.ticket-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ticket-meta-row span {
+  color: #64748b;
+}
+
+.ticket-meta-row strong {
+  color: #0f172a;
+}
+
+.barcode-container {
+  margin: 1rem 0;
+}
+
+.barcode-lines {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  height: 38px;
+}
+
+.barcode-lines span {
+  display: inline-block;
+  background: #000000;
+  height: 100%;
+}
+
+.barcode-lines span:nth-child(even) { width: 4px; }
+.barcode-lines span:nth-child(odd) { width: 2px; }
+.barcode-lines span:nth-child(3n) { width: 5px; }
+
+.barcode-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  margin-top: 0.35rem;
+}
+
+.ticket-clinic-footer {
+  font-size: 0.75rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* ===================================================================
+   FOOTER
+   =================================================================== */
+.app-footer {
+  background: #ffffff;
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: auto;
+}
+
+/* ===================================================================
+   PRINT STYLES FOR THERMAL RECEIPT PRINTER
+   =================================================================== */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .no-print,
+  .app-header,
+  .app-footer,
+  .nav-tabs,
+  .modal-header,
+  .modal-footer,
+  .main-container {
+    display: none !important;
+  }
+
+  .modal-backdrop {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+
+  .modal-dialog {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .modal-content {
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .ticket-thermal-card {
+    width: 78mm !important;
+    margin: 0 auto !important;
+    padding: 10px 5px !important;
+  }
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN
+   =================================================================== */
+@media (max-width: 992px) {
+  .display-counter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .operator-layout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kiosk-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-inner {
+    flex-direction: column;
+    height: auto;
+    padding: 0.75rem 0;
+    gap: 0.5rem;
+  }
+
+  .nav-tabs {
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .hero-board-body {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .hero-arrow {
+    transform: rotate(90deg);
+  }
+
+  .hero-destination-wrap {
+    text-align: center;
+  }
+
+  .display-counter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
